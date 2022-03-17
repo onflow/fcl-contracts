@@ -1,0 +1,15 @@
+{
+	"accounts": {
+		"testnet-account": {
+			"address": "0x74daa6f9c7ef24b1",
+			"key": "${FCL_CONTRACTS_TESTNET_PRIVATE_KEY}"
+		}
+	},
+	"deployments": {
+		"testnet": {
+			"testnet-account": [
+				"FCLCrypto"
+			]
+		}
+	}
+}
