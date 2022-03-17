@@ -1,0 +1,15 @@
+{
+	"accounts": {
+		"mainnet-account": {
+			"address": "0xb4b82a1c9d21d284",
+			"key": "${FCL_CONTRACTS_MAINNET_PRIVATE_KEY}"
+		}
+	},
+	"deployments": {
+		"mainnet": {
+			"mainnet-account": [
+				"FCLCrypto"
+			]
+		}
+	}
+}

@@ -6,4 +6,4 @@ Cadence contracts used by the Flow Client Library (FCL).
 
 |Name|Testnet|Mainnet|
 |----|-------|-------|
-|`FCLCrypto`|`0x74daa6f9c7ef24b1`|?|
+|`FCLCrypto`|`0x74daa6f9c7ef24b1`|`0xb4b82a1c9d21d284`|
