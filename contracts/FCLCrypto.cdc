@@ -42,8 +42,9 @@ pub contract FCLCrypto {
         }
 
         let account = getAccount(address)
+        let signedData = message.decodeHex()
 
-        var validWeights: UFix64 = 0.0
+        var totalWeight: UFix64 = 0.0
         let seenKeyIndices: {Int: Bool} = {}
 
         var i = 0
@@ -73,19 +74,19 @@ pub contract FCLCrypto {
 
             if !accountKey.publicKey.verify(
                 signature: signature,
-                signedData: message.decodeHex(),
+                signedData: signedData,
                 domainSeparationTag: domainSeparationTag,
                 hashAlgorithm: accountKey.hashAlgorithm
             ) {
                 return false
             }
 
-            validWeights = validWeights + accountKey.weight
+            totalWeight = totalWeight + accountKey.weight
 
             i = i + 1
         }
         
-        return validWeights >= 1000.0
+        return totalWeight >= 1000.0
     }
 
     priv let domainSeparationTagFlowUser: String
