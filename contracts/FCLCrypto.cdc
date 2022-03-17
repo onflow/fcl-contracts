@@ -42,7 +42,7 @@ pub contract FCLCrypto {
         }
 
         let account = getAccount(address)
-        let signedData = message.decodeHex()
+        let messageBytes = message.decodeHex()
 
         var totalWeight: UFix64 = 0.0
         let seenKeyIndices: {Int: Bool} = {}
@@ -74,7 +74,7 @@ pub contract FCLCrypto {
 
             if !accountKey.publicKey.verify(
                 signature: signature,
-                signedData: signedData,
+                signedData: messageBytes,
                 domainSeparationTag: domainSeparationTag,
                 hashAlgorithm: accountKey.hashAlgorithm
             ) {
