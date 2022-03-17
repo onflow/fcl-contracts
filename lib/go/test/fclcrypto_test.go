@@ -22,6 +22,7 @@ func TestDeployFCLCryptoContract(t *testing.T) {
 type testCase struct {
 	name        string
 	accountKeys []*flow.AccountKey
+	keyIndices  []int
 	signers     []crypto.Signer
 	expected    bool
 }
@@ -61,38 +62,72 @@ func testVerifySignatures(t *testing.T, getVerifyScript func(Contracts) []byte) 
 
 	testCases := []testCase{
 		{
+			"empty list",
+			[]*flow.AccountKey{accountKeyA},
+			[]int{},
+			[]crypto.Signer{},
+			false,
+		},
+		{
 			"single key - full weight - valid signature",
 			[]*flow.AccountKey{accountKeyA},
+			[]int{0},
 			[]crypto.Signer{signerA},
 			true,
 		},
 		{
 			"single key - full weight - invalid signature",
 			[]*flow.AccountKey{accountKeyA},
+			[]int{0},
 			[]crypto.Signer{signerB},
 			false,
 		},
 		{
 			"single key - partial weight - valid signature",
 			[]*flow.AccountKey{accountKeyB},
+			[]int{0},
 			[]crypto.Signer{signerB},
 			false,
 		},
 		{
 			"multi key - full weight - valid signatures",
 			[]*flow.AccountKey{accountKeyC, accountKeyD},
+			[]int{0, 1},
 			[]crypto.Signer{signerC, signerD},
 			true,
 		},
 		{
 			"multi key - full weight - invalid signatures",
 			[]*flow.AccountKey{accountKeyC, accountKeyD},
+			[]int{0, 1},
 			[]crypto.Signer{signerD, signerC},
+			false,
+		},
+		{
+			"multi key - full weight - length of signatures and keys is different - valid signatures",
+			[]*flow.AccountKey{accountKeyA, accountKeyB},
+			[]int{0, 1},
+			[]crypto.Signer{signerA},
+			false,
+		},
+		{
+			"multi key - full weight - redundant keys - valid signatures",
+			[]*flow.AccountKey{accountKeyA, accountKeyB},
+			[]int{0, 1, 0},
+			[]crypto.Signer{signerA, signerB, signerA},
+			false,
+		},
+		{
+			"multi key - full weight - valid signatures and have full weight - one signature is invalid",
+			[]*flow.AccountKey{accountKeyA, accountKeyB, accountKeyC},
+			[]int{0, 1, 2},
+			[]crypto.Signer{signerA, signerB, signerD},
 			false,
 		},
 		{
 			"multi key - partial weight - valid signatures",
 			[]*flow.AccountKey{accountKeyB, accountKeyC},
+			[]int{0, 1},
 			[]crypto.Signer{signerB, signerC},
 			false,
 		},
@@ -120,7 +155,7 @@ func testVerifySignatures(t *testing.T, getVerifyScript func(Contracts) []byte) 
 				verifyScript,
 				address,
 				message,
-				testCase.accountKeys,
+				testCase.keyIndices,
 				signatures,
 			)
 
@@ -135,15 +170,15 @@ func verifySignatures(
 	script []byte,
 	address flow.Address,
 	message []byte,
-	accountKeys []*flow.AccountKey,
+	keyIndices []int,
 	signatures [][]byte,
 ) bool {
 	messageHex := hex.EncodeToString(message)
 
-	keyIndicesCadence := make([]cadence.Value, len(accountKeys))
+	keyIndicesCadence := make([]cadence.Value, len(keyIndices))
 
-	for i := range accountKeys {
-		keyIndicesCadence[i] = cadence.NewInt(i)
+	for i, index := range keyIndices {
+		keyIndicesCadence[i] = cadence.NewInt(index)
 	}
 
 	signaturesCadance := make([]cadence.Value, len(signatures))
