@@ -11,7 +11,7 @@ pub contract FCLCrypto {
             message: message,
             keyIndices: keyIndices,
             signatures: signatures,
-            domainSeparationTag: self.domainSeparationTagUser,
+            domainSeparationTag: self.domainSeparationTagFlowUser,
         )
     }
 
@@ -26,7 +26,7 @@ pub contract FCLCrypto {
             message: message,
             keyIndices: keyIndices,
             signatures: signatures,
-            domainSeparationTag: self.domainSeparationTagUser,
+            domainSeparationTag: self.domainSeparationTagFlowUser,
         )
     }
 
@@ -88,7 +88,7 @@ pub contract FCLCrypto {
         return validWeights >= 1000.0
     }
 
-    priv let domainSeparationTagUser: String
+    priv let domainSeparationTagFlowUser: String
     priv let domainSeparationTagFCLUser: String
     priv let domainSeparationTagAccountProof: String
 
