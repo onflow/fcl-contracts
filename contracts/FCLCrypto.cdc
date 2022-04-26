@@ -1,5 +1,5 @@
 pub contract FCLCrypto {
-    
+
     pub fun verifyUserSignatures(
         address: Address,
         message: String,
@@ -22,6 +22,13 @@ pub contract FCLCrypto {
         signatures: [String]
     ): Bool {
         return self.verifySignatures(
+            address: address,
+            message: message,
+            keyIndices: keyIndices,
+            signatures: signatures,
+            domainSeparationTag: self.domainSeparationTagAccountProof,
+        ) || 
+        self.verifySignatures(
             address: address,
             message: message,
             keyIndices: keyIndices,
