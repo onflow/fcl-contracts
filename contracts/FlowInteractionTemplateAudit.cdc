@@ -55,7 +55,7 @@ pub contract FlowInteractionTemplateAudit {
     return <- create FlowInteractionTemplateAuditManager()
   }
 
-  pub fun getHasAuditedTemplateByAuditors(templateId: String, auditors: [Address]): {Address:Bool} {
+  pub fun getHasTemplateBeenAuditedByAuditors(templateId: String, auditors: [Address]): {Address:Bool} {
     let audits: {Address:Bool} = {}
 
     for auditor in auditors {
