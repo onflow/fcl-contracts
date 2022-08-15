@@ -35,11 +35,17 @@ pub contract FlowInteractionTemplateAudit {
     }
   
     pub fun addAudit(templateId: String) {
+      pre {
+        !self.audits.containsKey(templateId): "Cannot audit template that is already audited"
+      }
       self.audits.insert(key: templateId, true)
       emit AuditAdded(templateId: templateId, auditor: self.owner?.address!)
     }
 
     pub fun revokeAudit(templateId: String) {
+      pre {
+        self.audits.containsKey(templateId): "Cannot revoke audit for a template that is not already audited"
+      }
       self.audits.remove(key: templateId)
       emit AuditRevoked(templateId: templateId, auditor: self.owner?.address!)
     }
