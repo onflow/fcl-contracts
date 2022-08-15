@@ -8,15 +8,18 @@ import (
 
 type Contracts struct {
 	FCLCrypto flow.Address
+	FlowInteractionTemplateAudit flow.Address
 }
 
 var fclCryptoPlaceholder = regexp.MustCompile(`"[^"\s].*/FCLCrypto.cdc"`)
+var flowInteractionTemplatePlaceholder = regexp.MustCompile(`"[^"\s].*/FlowInteractionTemplateAudit.cdc"`)
 
 const (
 	fclCryptoPath                    = "../../../contracts/FCLCrypto.cdc"
 	scriptsRootPath                  = "../../../scripts"
-	verifyUserSignaturesPath         = scriptsRootPath + "/verifyUserSignatures.cdc"
-	verifyAccountProofSignaturesPath = scriptsRootPath + "/verifyAccountProofSignatures.cdc"
+	flowInteractionTemplatePath			 = "../../../contracts/FlowInteractionTemplateAudit.cdc"
+	verifyUserSignaturesPath         = scriptsRootPath + "/FCLCrypto/verifyUserSignatures.cdc"
+	verifyAccountProofSignaturesPath = scriptsRootPath + "/FCLCrypto/verifyAccountProofSignatures.cdc"
 )
 
 func replaceAddresses(codeBytes []byte, contracts Contracts) []byte {
@@ -29,6 +32,10 @@ func replaceAddresses(codeBytes []byte, contracts Contracts) []byte {
 
 func fclCryptoContract() []byte {
 	return readFile(fclCryptoPath)
+}
+
+func flowInteractionTemplateContract() []byte {
+	return readFile(flowInteractionTemplatePath)
 }
 
 func verifyUserSignaturesScript(contracts Contracts) []byte {

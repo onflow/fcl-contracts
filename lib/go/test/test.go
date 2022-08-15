@@ -28,6 +28,24 @@ func deployFCLCryptoContract(t *testing.T, b *emulator.Blockchain) flow.Address 
 	return address
 }
 
+func deployFlowInteractionTemplateAuditContract(t *testing.T, b *emulator.Blockchain) flow.Address {
+	code := flowInteractionTemplateContract()
+	address, err := b.CreateAccount(nil,
+		[]templates.Contract{
+			{
+				Name:   "FlowInteractionTemplateAudit",
+				Source: string(code),
+			},
+		},
+	)
+	require.NoError(t, err)
+
+	_, err = b.CommitBlock()
+	require.NoError(t, err)
+
+	return address
+}
+
 // newEmulator returns a emulator object for testing
 func newEmulator() *emulator.Blockchain {
 	b, err := emulator.NewBlockchain()
