@@ -71,7 +71,7 @@ pub contract FlowInteractionTemplateAudit {
     // Maintains the set of Interaction Template IDs that the owner of this 
     // FlowInteractionTemplateAuditManager has audited.
     //
-    // Represents a map from Interaction Template IDs (String) => isAudited (Bool).
+    // Represents a map from Interaction Template ID (String) => isAudited (Bool).
     // The value of each element of the map is Boolean 'true'.
     // This is a map as to allow for cheaper lookups, inserts and removals.
     //
