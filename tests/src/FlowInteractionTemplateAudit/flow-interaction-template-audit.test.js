@@ -9,7 +9,6 @@ import {
   createAccount,
   executeScript,
 } from "@onflow/flow-js-testing";
-import * as fcl from "@onflow/fcl";
 
 const CADENCE_PATH = "../../../cadence";
 
