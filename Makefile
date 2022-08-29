@@ -1,9 +1,9 @@
 .PHONY: test
 test:
 	$(MAKE) test -C lib/go
-	cd tests && npm i && npm run test
+	sh -c "cd tests && npm i && npm test" || exit 255
 
 .PHONY: ci
 ci:
 	$(MAKE) ci -C lib/go
-	cd tests && npm i && npm run test
+	sh -c "cd tests && npm i && npm test" || exit 255
