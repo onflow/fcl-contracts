@@ -2,25 +2,25 @@ import FlowInteractionTemplateAudit from "./contracts/FlowInteractionTemplateAud
 
 transaction() {
   prepare(auditor: AuthAccount) {
-    if auditor.borrow<&FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManager>(from: FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerStoragePath) == nil {
-      let FlowInteractionTemplateAuditManager <- FlowInteractionTemplateAudit.createFlowInteractionTemplateAuditManager()
+    if auditor.borrow<&FlowInteractionTemplateAudit.AuditManager>(from: FlowInteractionTemplateAudit.AuditManagerStoragePath) == nil {
+      let FlowInteractionTemplateAuditManager <- FlowInteractionTemplateAudit.createAuditManager()
 
       auditor.save(
         <- FlowInteractionTemplateAuditManager, 
-        to: FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerStoragePath,
+        to: FlowInteractionTemplateAudit.AuditManagerStoragePath,
       )
             
-      auditor.link<&FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManager{FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerPublic}>(
-        FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerPublicPath,
-        target: FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerStoragePath
+      auditor.link<&FlowInteractionTemplateAudit.AuditManager{FlowInteractionTemplateAudit.AuditManagerPublic}>(
+        FlowInteractionTemplateAudit.AuditManagerPublicPath,
+        target: FlowInteractionTemplateAudit.AuditManagerStoragePath
       )
 
-      auditor.link<&FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManager{FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerPrivate}>(
-        FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerPrivatePath,
-        target: FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerStoragePath
+      auditor.link<&FlowInteractionTemplateAudit.AuditManager{FlowInteractionTemplateAudit.AuditManagerPrivate}>(
+        FlowInteractionTemplateAudit.AuditManagerPrivatePath,
+        target: FlowInteractionTemplateAudit.AuditManagerStoragePath
       )
     } else {
-      panic("Cannot create new FlowInteractionTemplateAuditManager, one already exists.")
+      panic("Cannot create new AuditManager, one already exists.")
     }
   }
 }

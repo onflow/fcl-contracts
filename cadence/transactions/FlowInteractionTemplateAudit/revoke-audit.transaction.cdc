@@ -1,12 +1,12 @@
 import FlowInteractionTemplateAudit from "./contracts/FlowInteractionTemplateAudit.cdc"
 
 transaction(templateId: String) {
-  let FlowInteractionTemplateAuditManagerPrivateRef: &FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManager{FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerPrivate}
+  let FlowInteractionTemplateAuditManagerPrivateRef: &FlowInteractionTemplateAudit.AuditManager{FlowInteractionTemplateAudit.AuditManagerPrivate}
 
   prepare(account: AuthAccount) {
     self.FlowInteractionTemplateAuditManagerPrivateRef = 
-      account.borrow<&FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManager{FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerPrivate}>(from: FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerStoragePath)
-        ?? panic("Could not borrow ref to FlowInteractionTemplateAuditManagerPrivate")
+      account.borrow<&FlowInteractionTemplateAudit.AuditManager{FlowInteractionTemplateAudit.AuditManagerPrivate}>(from: FlowInteractionTemplateAudit.AuditManagerStoragePath)
+        ?? panic("Could not borrow ref to AuditManagerPrivate")
   }
 
   execute {

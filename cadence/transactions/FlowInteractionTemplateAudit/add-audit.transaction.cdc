@@ -1,30 +1,30 @@
 import FlowInteractionTemplateAudit from "./contracts/FlowInteractionTemplateAudit.cdc"
 
 transaction(templateId: String) {
-  let flowInteractionTemplateAuditManagerPrivateRef: &FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManager{FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerPrivate}
+  let flowInteractionTemplateAuditManagerPrivateRef: &FlowInteractionTemplateAudit.AuditManager{FlowInteractionTemplateAudit.AuditManagerPrivate}
   prepare(account: AuthAccount) {
-    if account.borrow<&FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManager>(from: FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerStoragePath) == nil {
-      let FlowInteractionTemplateAuditManager <- FlowInteractionTemplateAudit.createFlowInteractionTemplateAuditManager()
+    if account.borrow<&FlowInteractionTemplateAudit.AuditManager>(from: FlowInteractionTemplateAudit.AuditManagerStoragePath) == nil {
+      let FlowInteractionTemplateAuditManager <- FlowInteractionTemplateAudit.createAuditManager()
 
       account.save(
         <- FlowInteractionTemplateAuditManager, 
-        to: FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerStoragePath,
+        to: FlowInteractionTemplateAudit.AuditManagerStoragePath,
       )
             
-      account.link<&FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManager{FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerPublic}>(
-        FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerPublicPath,
-        target: FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerStoragePath
+      account.link<&FlowInteractionTemplateAudit.AuditManager{FlowInteractionTemplateAudit.AuditManagerPublic}>(
+        FlowInteractionTemplateAudit.AuditManagerPublicPath,
+        target: FlowInteractionTemplateAudit.AuditManagerStoragePath
       )
 
-      account.link<&FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManager{FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerPrivate}>(
-        FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerPrivatePath,
-        target: FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerStoragePath
+      account.link<&FlowInteractionTemplateAudit.AuditManager{FlowInteractionTemplateAudit.AuditManagerPrivate}>(
+        FlowInteractionTemplateAudit.AuditManagerPrivatePath,
+        target: FlowInteractionTemplateAudit.AuditManagerStoragePath
       )
     }
 
     self.flowInteractionTemplateAuditManagerPrivateRef = 
-      account.borrow<&FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManager{FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerPrivate}>(from: FlowInteractionTemplateAudit.FlowInteractionTemplateAuditManagerStoragePath)
-        ?? panic("Could not borrow ref to FlowInteractionTemplateAuditManagerPrivate")
+      account.borrow<&FlowInteractionTemplateAudit.AuditManager{FlowInteractionTemplateAudit.AuditManagerPrivate}>(from: FlowInteractionTemplateAudit.AuditManagerStoragePath)
+        ?? panic("Could not borrow ref to AuditManagerPrivate")
   }
 
   execute {
