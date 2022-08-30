@@ -42,7 +42,8 @@ describe("interactions - sendTransaction", () => {
   });
 
   afterEach(async () => {
-    return emulator.stop();
+    await emulator.stop();
+    return;
   });
 
   test("add audit", async () => {
