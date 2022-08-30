@@ -1,0 +1,34 @@
+{
+  "name": "fcl-contracts-tets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "jest": {
+    "transform": {
+      ".js": "jest-esm-transformer"
+    },
+    "testEnvironment": "jsdom",
+    "globals": {
+      "window": {},
+      "PACKAGE_CURRENT_VERSION": "TESTVERSION"
+    }
+  },
+  "devDependencies": {
+    "@onflow/fcl-bundle": "^1.0.1-alpha.0",
+    "jest": "^27.5.1",
+    "jest-esm-transformer": "1.0.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10",
+    "@onflow/fcl": "^1.2.0",
+    "@onflow/flow-cadut": "^0.2.0-alpha.8",
+    "@onflow/flow-js-testing": "^0.3.0-alpha.14",
+    "babel-jest": "^28.1.3"
+  }
+}
