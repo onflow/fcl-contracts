@@ -1,15 +1,15 @@
 /*
   FlowInteractionTemplateAudit
 
-  The FlowInteractionTemplateAudit contract manages the creation 
+  The FlowInteractionTemplateAudit contract manages the creation
   of AuditManager resources. It also maintains some
-  helpful utilities for querying from AuditManager 
+  helpful utilities for querying from AuditManager
   resouces.
 
   AuditManager resouces maintain the IDs of
   InteractionTemplate data structures that have been audited by the
   owner of the AuditManager. The owner of an
-  AuditManager resource is consididered an 
+  AuditManager resource is consididered an
   Interaction Template Auditor.
 
   See additional documentation: https://github.com/onflow/fcl-contracts
@@ -19,19 +19,19 @@ pub contract FlowInteractionTemplateAudit {
 
   /****** Audit Events ******/
 
-  // The event that is emitted when an audit is added to an 
+  // The event that is emitted when an audit is added to an
   // AuditManager.
-  // 
+  //
   pub event AuditAdded(templateId: String, auditor: Address, auditManagerID: UInt64)
 
-  // The event that is emitted when an audit is revoked from an 
+  // The event that is emitted when an audit is revoked from an
   // AuditManager.
-  // 
+  //
   pub event AuditRevoked(templateId: String, auditor: Address, auditManagerID: UInt64)
 
   // The event that is emitted when an AuditManager
   // is created.
-  // 
+  //
   pub event AuditorCreated(auditManagerID: UInt64)
 
   /****** Storage Paths ******/
@@ -53,7 +53,7 @@ pub contract FlowInteractionTemplateAudit {
   // Private Interface for AuditManager.
   //
   // Maintains the private methods on an
-  // AuditManager resource. These methods 
+  // AuditManager resource. These methods
   // must be only accessible by the owner of the AuditManager
   //
   pub resource interface AuditManagerPrivate {
@@ -63,12 +63,12 @@ pub contract FlowInteractionTemplateAudit {
 
   // The AuditManager resource.
   //
-  // Maintains the IDs of the InteractionTemplate the owner of the 
+  // Maintains the IDs of the InteractionTemplate the owner of the
   // AuditManager has audited.
   //
   pub resource AuditManager: AuditManagerPublic, AuditManagerPrivate {
-    
-    // Maintains the set of Interaction Template IDs that the owner of this 
+
+    // Maintains the set of Interaction Template IDs that the owner of this
     // Manager has audited.
     //
     // Represents a map from Interaction Template ID (String) => isAudited (Bool).
@@ -76,17 +76,17 @@ pub contract FlowInteractionTemplateAudit {
     // This is a map as to allow for cheaper lookups, inserts and removals.
     //
     access(self) var audits: {String:Bool}
-    
+
     init() {
       // Initialize the set of audits maintained by this AuditManager resource
       self.audits = {}
       emit AuditorCreated(auditManagerID: self.uuid)
     }
 
-    // Returns the Interaction Template IDs that the owner of this 
+    // Returns the Interaction Template IDs that the owner of this
     // AuditManager has audited.
     //
-    // @return An array of Interaction Template IDs that the owner of this 
+    // @return An array of Interaction Template IDs that the owner of this
     // AuditManager has audited.
     //
     pub fun getAudits(): [String] {
@@ -104,7 +104,7 @@ pub contract FlowInteractionTemplateAudit {
     pub fun getHasAuditedTemplate(templateId: String): Bool {
       return self.audits.containsKey(templateId)
     }
-  
+
     // Adds an Interaction Template ID to the AuditManager
     // to denote that the Interaction Template it corresponds to has been audited by the
     // owner of the AuditManager.
@@ -142,11 +142,11 @@ pub contract FlowInteractionTemplateAudit {
     return <- create AuditManager()
   }
 
-  // Utility method to check which auditors have audited a given Interaction Template ID 
+  // Utility method to check which auditors have audited a given Interaction Template ID
   //
   // @param templateId: ID of an Interaction Template
   // @param auditors: Array of addresses of auditors
-  // 
+  //
   // @return A map of auditorAddress => isAuditedByAuditor
   //
   pub fun getHasTemplateBeenAuditedByAuditors(templateId: String, auditors: [Address]): {Address:Bool} {
@@ -164,10 +164,10 @@ pub contract FlowInteractionTemplateAudit {
     return audits
   }
 
-  // Utility method to get an array of Interaction Template IDs audited by an auditor. 
+  // Utility method to get an array of Interaction Template IDs audited by an auditor.
   //
   // @param auditor: Address of an auditor
-  // 
+  //
   // @return An array of Interaction Template IDs
   //
   pub fun getAuditsByAuditor(auditor: Address): [String] {
@@ -179,7 +179,7 @@ pub contract FlowInteractionTemplateAudit {
     return auditManagerRef.getAudits()
   }
 
-  init() { 
+  init() {
     self.AuditManagerStoragePath = /storage/FlowInteractionTemplateAuditManagerStoragePath
     self.AuditManagerPublicPath = /public/FlowInteractionTemplateAuditManagerPublicPath
     self.AuditManagerPrivatePath = /private/FlowInteractionTemplateAuditManagerPrivatePath
