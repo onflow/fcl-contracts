@@ -6,7 +6,7 @@
   helpful utilities for querying from AuditManager
   resouces.
 
-  AuditManager resouces maintain the IDs of
+  AuditManager resources maintain the IDs of
   InteractionTemplate data structures that have been audited by the
   owner of the AuditManager. The owner of an
   AuditManager resource is consididered an
