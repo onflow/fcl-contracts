@@ -1,12 +1,14 @@
 # FCL Contracts
 
-`FCLCrypto.cdc` and `FlowInteractionTemplateAudit.cdc` are contracts which can be used by the Flow Client Library (FCL).  
+`FCLCrypto.cdc` and `FlowInteractionTemplateAudit.cdc` are contracts which revolve around [Interaction Templates](https://forum.onflow.org/t/flip-934-interaction-templates/3080) and can be used by the Flow Client Library (FCL).  
+*Interaction Templates* are a concept to represent how to interact with a contract. Further information can be obtained by following the link above.  
   
 `FCLCrypto.cdc` allows to verify the signatures for an account and check that the combined weight of the account keys reaches signing power.  
 It provides the function `verifyUserSignatures` for user signatures and the function `verifyAccountProofSignatures` for account proof signatures.  
-These functions are accessible by the provided scripts `verifyUserSignatures.cdc` and `verifyAccountProofSignatures.cdc`.
+These functions are accessible by the provided scripts `verifyUserSignatures.cdc` and `verifyAccountProofSignatures.cdc`.  
   
-In order to add [Interaction Templates](https://forum.onflow.org/t/flip-934-interaction-templates/3080) which shall be audited, use the `FlowInteractionTemplateAudit.cdc` contract and add the template by executing the transaction `add-audit.transaction.cdc` and provide the template id string. In order to revoke added audits, call the `revoke-audit.transaction.cdc` transaction.  
+In order to add *Interaction Templates* which shall be audited, use the `FlowInteractionTemplateAudit.cdc` contract and add the template by executing the transaction `add-audit.transaction.cdc` and provide the template id string.  
+In order to revoke added audits, call the `revoke-audit.transaction.cdc` transaction.  
   
 It's important to note that by executing `add-audit.transaction.cdc`, you've become an *Interaction Template Auditor*, and own an `AuditManager` resource. All audits which you add are bound to this resource.  
   
