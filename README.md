@@ -1,7 +1,7 @@
 # FCL Contracts
 
 `FCLCrypto.cdc` and `FlowInteractionTemplateAudit.cdc` are contracts which revolve around [Interaction Templates](https://forum.onflow.org/t/flip-934-interaction-templates/3080) and can be used by the Flow Client Library (FCL).  
-*Interaction Templates* are a concept to represent how to interact with a contract. Further information can be obtained by following the link above.  
+*Interaction Templates* are a concept to alleviate interacting with a contract by handing out descriptive information in a defined textual data structure. Further information can be obtained by following the link above.  
   
 `FCLCrypto.cdc` allows to verify the signatures for an account and check that the combined weight of the account keys reaches signing power.  
 It provides the function `verifyUserSignatures` for user signatures and the function `verifyAccountProofSignatures` for account proof signatures.  
