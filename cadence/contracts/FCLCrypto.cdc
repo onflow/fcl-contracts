@@ -1,5 +1,20 @@
+/*
+  FCLCrypto
+
+  The FCLCrypto contract provides functions which allow to verify signatures and check for signing power.
+*/
+
 pub contract FCLCrypto {
 
+    /// verifyUserSignatures  allows to verify the user signatures for the given account.
+    /// 
+    /// @param address: The address of the account
+    /// @param message: The signed data
+    /// @param keyIndices: This integer array maps the signatures to the account keys by index
+    /// @param signatures: The signatures belonging to the account keys
+    ///
+    /// @return Whether all signatures are valid and the combined total key weight reaches signing power
+    ///
     pub fun verifyUserSignatures(
         address: Address,
         message: String,
@@ -15,6 +30,15 @@ pub contract FCLCrypto {
         )
     }
 
+    /// verifyAccountProofSignatures allows to verify the account proof signatures for the given account.
+    /// 
+    /// @param address: The address of the account
+    /// @param message: The signed data
+    /// @param keyIndices: This integer array maps the signatures to the account keys by index
+    /// @param signatures: The signatures belonging to the account keys
+    ///
+    /// @return Whether all signatures are valid and the combined total key weight reaches signing power
+    ///
     pub fun verifyAccountProofSignatures(
         address: Address,
         message: String,
@@ -37,6 +61,17 @@ pub contract FCLCrypto {
         )
     }
 
+    /// verifySignatures is a private function which provides the functionality to verify 
+    /// signatures for the public functions.
+    /// 
+    /// @param address: The address of the account
+    /// @param message: The signed data
+    /// @param keyIndices: This integer array maps the signatures to the account keys by index
+    /// @param signatures: The signatures belonging to the account keys
+    /// @param domainSeparationTag: The domain tag originally used for the signatures
+    ///
+    /// @return Whether all signatures are valid and the combined total key weight reaches signing power
+    ///
     priv fun verifySignatures(
         address: Address,
         message: String,
