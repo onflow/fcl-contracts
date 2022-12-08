@@ -17,7 +17,7 @@ Further utility functions in the contract are `getAuditsByAuditor` which takes a
   
 ## Contract Addresses
 
-| Name                           | Testnet              | Mainnet              |
-| ------------------------------ | -------------------- | -------------------- |
-| `FCLCrypto`                    | `0x74daa6f9c7ef24b1` | `0xb4b82a1c9d21d284` |
-| `FlowInteractionTemplateAudit` | `0xf78bfc12d0a786dc` | `TBD`                |
+| Name                           | Testnet              | Mainnet              | Sandbox             |
+| ------------------------------ | -------------------- | -------------------- |---------------------|
+| `FCLCrypto`                    | `0x74daa6f9c7ef24b1` | `0xb4b82a1c9d21d284` |`0x57b2b89759200677` |
+| `FlowInteractionTemplateAudit` | `0xf78bfc12d0a786dc` | `TBD`                | `TBD`               |
