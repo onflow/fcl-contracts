@@ -4,7 +4,7 @@
   The FCLCrypto contract provides functions which allow to verify signatures and check for signing power.
 */
 
-pub contract FCLCrypto {
+access(all) contract FCLCrypto {
 
     /// verifyUserSignatures  allows to verify the user signatures for the given account.
     /// 
@@ -15,7 +15,7 @@ pub contract FCLCrypto {
     ///
     /// @return Whether all signatures are valid and the combined total key weight reaches signing power
     ///
-    pub fun verifyUserSignatures(
+    access(all) fun verifyUserSignatures(
         address: Address,
         message: String,
         keyIndices: [Int],
@@ -39,7 +39,7 @@ pub contract FCLCrypto {
     ///
     /// @return Whether all signatures are valid and the combined total key weight reaches signing power
     ///
-    pub fun verifyAccountProofSignatures(
+    access(all) fun verifyAccountProofSignatures(
         address: Address,
         message: String,
         keyIndices: [Int],
@@ -72,7 +72,7 @@ pub contract FCLCrypto {
     ///
     /// @return Whether all signatures are valid and the combined total key weight reaches signing power
     ///
-    priv fun verifySignatures(
+    access(self) fun verifySignatures(
         address: Address,
         message: String,
         keyIndices: [Int],
@@ -131,9 +131,9 @@ pub contract FCLCrypto {
         return totalWeight >= 1000.0
     }
 
-    priv let domainSeparationTagFlowUser: String
-    priv let domainSeparationTagFCLUser: String
-    priv let domainSeparationTagAccountProof: String
+    access(self) let domainSeparationTagFlowUser: String
+    access(self) let domainSeparationTagFCLUser: String
+    access(self) let domainSeparationTagAccountProof: String
 
     init() {
         self.domainSeparationTagFlowUser = "FLOW-V0.0-user"
