@@ -1,6 +1,6 @@
-import FCLCrypto from "./contracts/FCLCrypto.cdc"
+import FCLCrypto from "../../contracts/FCLCrypto.cdc"
 
-pub fun main(
+access(all) fun main(
     address: Address,
     message: String,
     keyIndices: [Int],
